@@ -25,6 +25,11 @@ export class RainbowController {
 		return this.rainbowService.findAll();
 	}
 
+	@Get('colors')
+	findAllColors() {
+		return this.rainbowService.findAllColors();
+	}
+
 	@Get(':id')
 	findOne(@Param('id') id: string) {
 		return this.rainbowService.findOne(+id);

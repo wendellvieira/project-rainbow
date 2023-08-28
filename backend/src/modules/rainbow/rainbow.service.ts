@@ -13,7 +13,8 @@ export class RainbowService {
 	) {}
 
 	create(createRainbowDto: CreateRainbowDto) {
-		return this.rainbowRepo.create(createRainbowDto);
+		const rainbow = this.rainbowRepo.create(createRainbowDto);
+		return this.rainbowRepo.save(rainbow);
 	}
 
 	findAll() {
@@ -28,6 +29,18 @@ export class RainbowService {
 		}
 
 		return rainbow;
+	}
+
+	findAllColors() {
+		return [
+			{ nome: 'Vermelho', hex: '#FF0000' },
+			{ nome: 'Laranja', hex: '#FF7F00' },
+			{ nome: 'Amarelo', hex: '#FFFF00' },
+			{ nome: 'Verde', hex: '#008000' },
+			{ nome: 'Azul', hex: '#0000FF' },
+			{ nome: 'Anil', hex: '#4B0082' },
+			{ nome: 'Violeta', hex: '#9400D3' },
+		];
 	}
 
 	update(id: number, updateRainbowDto: UpdateRainbowDto) {

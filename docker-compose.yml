@@ -3,7 +3,6 @@ version: "3"
 services:
   # Serviço do PostgreSQL
   db:
-    container_name: 'database'
     image: postgres:latest
     environment:
       POSTGRES_USER: user
@@ -16,11 +15,7 @@ services:
 
   # Serviço do back-end usando NestJS
   backend:
-    image: node:latest
-    working_dir: /app
-    volumes:
-      - ./backend:/app # substitua './backend' pelo caminho do seu projeto NestJS no host
-    command: bash -c "npm install && npm run start:dev"
+    build: ./backend
     ports:
       - "3000:3000"
     depends_on:
