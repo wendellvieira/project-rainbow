@@ -3,7 +3,7 @@ import { RainbowService } from './rainbow.service';
 import { RainbowController } from './rainbow.controller';
 
 @Module({
-  controllers: [RainbowController],
-  providers: [RainbowService],
+	controllers: [RainbowController],
+	providers: [RainbowService],
 })
 export class RainbowModule {}
