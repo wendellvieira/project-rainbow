@@ -1,33 +1,39 @@
+import { useState } from 'react';
+
+import Buttons from '../../components/Buttons';
+import Inputs from '../../components/Inputs';
+import Texts from '../../components/Texts';
+import { Rainbow, rainbowFactory } from '../../interfaces/Rainbow';
+
 export function RainbowPage() {
+	const form = useState<Rainbow>(rainbowFactory());
+
 	return (
 		<div className="max-w-2xl mx-auto pt-10 xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
-			<h1 className="inline-block text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight dark:text-slate-200">
-				Title
-			</h1>
-			<p className="mt-6">any desc</p>
+			<Texts.Title
+				title="🌈 Bem-vindo!"
+				desc="Olá! Estamos animados em tê-lo conosco. Por favor, preencha os campos abaixo com suas informações. Isso nos ajudará a conhecer você melhor e a atendê-lo de forma ainda mais personalizada."
+			/>
 
-			<div className="mt-4">
-				<label className="block text-sm font-medium leading-6 text-slate-300">
-					label
-				</label>
-				<div className="mt-2">
-					<div className="flex text-slate-400 bg-slate-800 rounded-md">
-						<input
-							type="text"
-							className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-slate-300 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-						/>
-					</div>
-				</div>
+			<div className="mt-8">
+				<Inputs.Text
+					label="Nome completo"
+					data={form}
+					field="fullName"
+				/>
+				<Inputs.Text label="CPF" data={form} field="document" />
+				<Inputs.Text label="Email" data={form} field="email" />
+				<Inputs.Text label="Cor preferida" data={form} field="color" />
+				<Inputs.Text label="Observações" data={form} field="comments" />
 			</div>
 
-			<div className="mt-6">
-				<button
-					type="button"
-					className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-				>
-					button
-				</button>
+			<div className="my-12">
+				<Buttons.Primary label="Enviar" />
 			</div>
 		</div>
 	);
 }
+
+// (51) 98947-5543
+// https://app.innovea.com.br/cadastro_ipros
+// https://innovea.com.br/teste-de-homologacao/
