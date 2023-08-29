@@ -4,7 +4,7 @@ export function DatabaseConfig() {
 	console.log(__dirname);
 	return TypeOrmModule.forRoot({
 		type: 'postgres',
-		host: 'localhost',
+		host: 'db',
 		port: 5432,
 		username: 'user',
 		password: 'password',
