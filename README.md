@@ -29,8 +29,13 @@ npm run start
 ## Sobre a entraga
 
 Confira abaixo a tela final do teste:
+
+<p>
 <img src='prints/test.png' alt="Tela Final" style='width: 500px' />
+</p>
 
 Além disso, é possível acessar a documentação da API através do Swagger no seguinte endereço: [http://localhost:3030/api](http://localhost:3030/api)
 
+<p>
  <img src='prints/swagger.png' alt="Swagger UI" style='width: 500px'  />
+</p>
