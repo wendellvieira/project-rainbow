@@ -6,6 +6,7 @@ import Texts from '../../components/Texts';
 import { Rainbow, rainbowFactory } from '../../interfaces/Rainbow';
 import { api } from '../../services/axios';
 import Swal from 'sweetalert2';
+import { IsValid } from '../../utils/IsValid';
 
 export function RainbowPage() {
 	const form = useState<Rainbow>(rainbowFactory());
@@ -39,10 +40,51 @@ export function RainbowPage() {
 					label="Nome completo"
 					data={form}
 					field="fullName"
+					rules={[
+						[
+							(v) => !IsValid.notEmpty(v),
+							'O nome deve conter mais de 3 carecteres',
+						],
+					]}
 				/>
-				<Inputs.Text label="CPF" data={form} field="document" />
-				<Inputs.Text label="Email" data={form} field="email" />
-				<Inputs.Text label="Cor preferida" data={form} field="color" />
+
+				<Inputs.Text
+					label="CPF"
+					mask="999.999.999-99"
+					data={form}
+					field="document"
+					rules={[
+						[
+							(v) => !IsValid.cpf(v),
+							'O CPF informado não é válido',
+						],
+					]}
+				/>
+
+				<Inputs.Text
+					label="Email"
+					data={form}
+					field="email"
+					rules={[
+						[
+							(v) => !IsValid.email(v),
+							'O Email informado não é válido',
+						],
+					]}
+				/>
+
+				<Inputs.Text
+					label="Cor preferida"
+					data={form}
+					field="color"
+					rules={[
+						[
+							(v) => !IsValid.hexColor(v),
+							'O Email informado não é válido',
+						],
+					]}
+				/>
+
 				<Inputs.Text label="Observações" data={form} field="comments" />
 			</div>
 
