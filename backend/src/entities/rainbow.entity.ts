@@ -8,10 +8,10 @@ export class Rainbow {
 	@Column()
 	fullName: string;
 
-	@Column()
+	@Column({ unique: true })
 	document: string;
 
-	@Column()
+	@Column({ unique: true })
 	email: string;
 
 	@Column()

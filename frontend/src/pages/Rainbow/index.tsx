@@ -24,8 +24,12 @@ export function RainbowPage() {
 			});
 
 			setData(rainbowFactory());
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			await Swal.fire({
+				icon: 'error',
+				title: 'Opss.. 😅',
+				text: error?.response?.data?.message || 'Error inesperado!',
+			});
 		}
 	};
 

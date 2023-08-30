@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+	BadRequestException,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common';
 import { CreateRainbowDto } from './dto/create-rainbow.dto';
 import { UpdateRainbowDto } from './dto/update-rainbow.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,9 +16,23 @@ export class RainbowService {
 		private rainbowRepo: Repository<Rainbow>,
 	) {}
 
-	create(createRainbowDto: CreateRainbowDto) {
+	async create(createRainbowDto: CreateRainbowDto) {
+		await this.checkIfExist(createRainbowDto.email, createRainbowDto.email);
+
 		const rainbow = this.rainbowRepo.create(createRainbowDto);
 		return this.rainbowRepo.save(rainbow);
+	}
+
+	async checkIfExist(email: string, document: string) {
+		const exist = await this.rainbowRepo.exist({
+			where: [{ email }, { document }],
+		});
+
+		if (exist) {
+			throw new BadRequestException(
+				'Já existe um registro para este email ou CPF',
+			);
+		}
 	}
 
 	findAll() {
