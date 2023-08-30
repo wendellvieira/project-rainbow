@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Buttons from '../../components/Buttons';
 import Inputs from '../../components/Inputs';
@@ -10,6 +10,7 @@ import { IsValid } from '../../utils/IsValid';
 
 export function RainbowPage() {
 	const form = useState<Rainbow>(rainbowFactory());
+	const [colors, setColors] = useState<string[]>([]);
 
 	const handleSubmit = async () => {
 		try {
@@ -27,6 +28,21 @@ export function RainbowPage() {
 			console.log(error);
 		}
 	};
+
+	const requestColors = async () => {
+		try {
+			const { data } = await api.v1.get<{ hex: string }[]>(
+				'/rainbow/colors'
+			);
+			setColors(data.map(({ hex }) => hex));
+		} catch (error) {
+			console.log('🗿🍷 ~ error:', error);
+		}
+	};
+
+	useEffect(() => {
+		requestColors();
+	}, []);
 
 	return (
 		<div className="max-w-2xl mx-auto pt-10 px-10">
@@ -73,16 +89,11 @@ export function RainbowPage() {
 					]}
 				/>
 
-				<Inputs.Text
+				<Inputs.Color
 					label="Cor preferida"
 					data={form}
 					field="color"
-					rules={[
-						[
-							(v) => !IsValid.hexColor(v),
-							'O Email informado não é válido',
-						],
-					]}
+					colors={colors}
 				/>
 
 				<Inputs.Text label="Observações" data={form} field="comments" />
